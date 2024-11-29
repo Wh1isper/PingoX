@@ -39,7 +39,7 @@ jobs:
               uses: docker/login-action@v3
               with:
                   registry: ghcr.io
-                  username: ${{ github.actor }}
+                  username: wh1isper
                   password: ${{ secrets.PAT }}
             - name: Build and push image
               id: docker_build_publish

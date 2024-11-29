@@ -17,3 +17,5 @@ RUN chmod +x pingox
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["./pingox"]
+
+LABEL org.opencontainers.image.source https://github.com/wh1isper/pingox

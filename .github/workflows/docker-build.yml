@@ -28,7 +28,7 @@ jobs:
               uses: docker/login-action@v3
               with:
                   registry: ghcr.io
-                  username: ${{ github.actor }}
+                  username: wh1isper
                   password: ${{ secrets.PAT }}
             - name: Build and push release
               id: docker_build_release_matrix
