@@ -21,11 +21,11 @@ jobs:
               uses: actions-rust-lang/setup-rust-toolchain@v1
               with:
                   toolchain: nightly
-                  components: cargo-release
 
             # Verify build to ensure package compiles
             - name: Build the package
               run: |
+                  cargo install cargo-release
                   cargo release version --execute --no-confirm ${{ github.ref_name }}
                   cargo build --release
 
