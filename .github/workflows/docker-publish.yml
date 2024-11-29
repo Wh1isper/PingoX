@@ -41,7 +41,7 @@ jobs:
                   push: true
                   tags: |
                       ${{ vars.DOCKERHUB_USERNAME }}/pingox:${{ github.ref_name }}
-                      ghcr.io/${{ github.actor }}/pingox:${{ github.ref_name }}
+                      ghcr.io/wh1isper/pingox:${{ github.ref_name }}
             - name: Build and push image
               id: docker_build_publish_matrix_latest
               uses: docker/build-push-action@v5
