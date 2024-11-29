@@ -34,7 +34,14 @@ jobs:
               env:
                   CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
               run: cargo publish --allow-dirty
-
+            - name: Upload dists to release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  repo_token: ${{ secrets.GITHUB_TOKEN }}
+                  file: target/release/pingox
+                  file_glob: false
+                  tag: ${{ github.ref }}
+                  overwrite: true
             - name: Bump to next micro dev version
               run: cargo release version --execute --no-confirm patch
             - uses: stefanzweifel/git-auto-commit-action@v5
