@@ -26,7 +26,7 @@ jobs:
             # Verify build to ensure package compiles
             - name: Build the package
               run: |
-                  cargo release ${{ github.ref_name }} --no-publish --no-push
+                  cargo release version --execute --no-confirm ${{ github.ref_name }}
                   cargo build --release
 
             # Publish to crates.io
@@ -36,7 +36,7 @@ jobs:
               run: cargo publish
 
             - name: Bump to next micro dev version
-              run: cargo release minor --no-publish --no-push
+              run: cargo release version --execute --no-confirm patch
             - uses: stefanzweifel/git-auto-commit-action@v5
               with:
                   commit_message: Bump to next micro version
