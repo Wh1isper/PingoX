@@ -1,0 +1,43 @@
+name: Release to crates.io
+
+on:
+    release:
+        types: [published]
+
+permissions:
+    contents: write
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  token: ${{ secrets.PAT }}
+
+            # Install Rust toolchain
+            - name: Install Rust
+              uses: actions-rust-lang/setup-rust-toolchain@v1
+              with:
+                  toolchain: nightly
+                  components: cargo-release
+
+            # Verify build to ensure package compiles
+            - name: Build the package
+              run: |
+                  cargo release ${{ github.ref_name }} --no-publish --no-push
+                  cargo build --release
+
+            # Publish to crates.io
+            - name: Publish to crates.io
+              env:
+                  CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+              run: cargo publish
+
+            - name: Bump to next micro dev version
+              run: cargo release minor --no-publish --no-push
+            - uses: stefanzweifel/git-auto-commit-action@v5
+              with:
+                  commit_message: Bump to next micro version
+                  branch: ${{ github.event.repository.default_branch }}
