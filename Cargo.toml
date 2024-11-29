@@ -2,5 +2,13 @@
 name = "pingox"
 version = "0.0.0"
 edition = "2024"
+authors = ["wh1isper <jizhongsheng957@gmail.com>"]
+description = "A Loadbalance based on pingora"
+license = "BSD-3-Clause"
+repository = "https://github.com/Wh1isper/PingoX"
+documentation = "https://docs.rs/pingox"
+homepage = "https://github.com/Wh1isper/PingoX"
+keywords = ["loadbalance", "pingora"]
+categories = ["network-programming"]
 
 [dependencies]
